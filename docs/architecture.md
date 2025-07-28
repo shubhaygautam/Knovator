@@ -6,9 +6,10 @@ This project is divided into **server** and **client** applications.
 - **Express** handles HTTP requests.
 - **MongoDB** via Mongoose stores jobs and import logs.
 - **Bull** with **Redis** manages a queue for importing jobs.
-- **Cron** runs hourly to enqueue import tasks.
-- **Workers** fetch and parse XML feeds, converting them to JSON and storing
-  results in the database.
+- **Cron** runs hourly (configurable via `CRON_SCHEDULE`) to enqueue feed URLs.
+- A dedicated **worker** process consumes the queue with configurable
+  concurrency (`JOB_CONCURRENCY`). It fetches and parses XML feeds,
+  converting them to JSON and storing results in the database.
 
 ## Client
 - **Next.js** provides a simple admin interface.
